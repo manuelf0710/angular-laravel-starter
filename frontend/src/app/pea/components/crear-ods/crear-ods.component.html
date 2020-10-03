@@ -1,0 +1,48 @@
+<!--<p>crear-ods works!</p>-->
+<!--<app-buscar-producto></app-buscar-producto>-->
+<!--<app-autocomplete [url]="url" (seleccionado)="seleccionado($event)" [labelValue]="'descripcion'"></app-autocomplete>-->
+<app-loading *ngIf="loading"></app-loading>
+<form  [formGroup]="formulario" novalidate  (ngSubmit)="guardar($event)" >
+    <input type="hidden" id="id" formControlName="id" >
+    <div class="row">
+        <div class="col-md-4">
+            <button type="button" class="btn btn-success btn-sm mb-3" (click)="cargarFacturacion()" [disabled]="formulario.invalid"><i class="fa fa-search"></i> Cargar Periodos Facturación</button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="fecha" class="font-weight-bold">Fecha Inicio</label>
+                <div class="input-group input-group-sm">
+                    <div class="input-group-prepend" placement="top" ngbTooltip="fecha inicial">
+                    <span class="input-group-text"><i class="fa fa-th"></i></span>
+                    </div>
+                    <input  ngbDatepicker #d="ngbDatepicker" readonly type="text" class="form-control form-control-xs" placeholder="Fecha Inicial" formControlName="fecha_inicio" maxlength="100"  >
+                    <div class="input-group-append" (click)="d.toggle()" placement="top" ngbTooltip="Seleccionar fecha">
+                        <span class="input-group-text"><i   class="fa fa-calendar"  ></i></span>
+                    </div>
+                </div>
+                <div *ngIf="formulario.get('fecha_inicio').errors && formulario.get('fecha_inicio').touched">
+                    <small *ngIf="formulario.get('fecha_inicio').hasError('required')" class="form-text text-danger">El campo fecha inicio no debe estar vacío.</small>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="fecha" class="font-weight-bold">Fecha Fin</label>
+                <div class="input-group input-group-sm">
+                    <div class="input-group-prepend" placement="top" ngbTooltip="fecha inicio">
+                    <span class="input-group-text"><i class="fa fa-th"></i></span>
+                    </div>
+                    <input  ngbDatepicker #dffin="ngbDatepicker" readonly type="text" class="form-control form-control-xs" placeholder="Fecha Fin" formControlName="fecha_fin" maxlength="100"  >
+                    <div class="input-group-append" (click)="dffin.toggle()" placement="top" ngbTooltip="Seleccionar fecha fin">
+                        <span class="input-group-text"><i   class="fa fa-calendar"  ></i></span>
+                    </div>
+                </div>
+                <div *ngIf="formulario.get('fecha_fin').errors && formulario.get('fecha_fin').touched">
+                    <small *ngIf="formulario.get('fecha_fin').hasError('required')" class="form-text text-danger">El campo fecha fin no debe estar vacío.</small>
+                </div>
+            </div>        
+        </div>
+    </div>
+</form>
